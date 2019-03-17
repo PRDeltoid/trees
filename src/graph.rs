@@ -10,11 +10,10 @@ impl Graph {
     pub fn new(size: usize) -> Graph {
         Graph {
             size,
-            vertexes: vec![0; size],
+            vertexes: vec![99; size],
             edges: vec![Box::new(vec![]); size],
         }
     }
-
 
     pub fn add_edge(&mut self, node_a: usize, node_b: usize) {
         //Make sure the nodes are on the graph
