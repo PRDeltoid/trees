@@ -35,7 +35,7 @@ impl<T> BinaryTreeNode<T>
                     if node.left.is_some() {
                         nodes.extend(BinaryTreeNode::get_node_tree(&node.left, sort));
                     }
-                    nodes.push(node.val.clone()); //println!("{}", node.val);
+                    nodes.push(node.val.clone());
                     if node.right.is_some() {
                         nodes.extend(BinaryTreeNode::get_node_tree(&node.right, sort));
                     }
@@ -43,7 +43,7 @@ impl<T> BinaryTreeNode<T>
             },
             SortOrder::Preorder => {
                 if let Some(node) = node {
-                    nodes.push(node.val); //println!("{}", node.val);
+                    nodes.push(node.val);
                     if node.left.is_some() {
                         nodes.extend(BinaryTreeNode::get_node_tree(&node.left, sort));
                     }
@@ -110,6 +110,6 @@ impl<T> BinarySearchTree<T>
 impl<T> fmt::Display for BinarySearchTree<T>
     where T: PartialOrd + Copy + fmt::Display + fmt::Debug {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self.traverse(SortOrder::Inorder)) //BinaryTreeNode::get_node_tree(&self.root, SortOrder::Inorder))
+        write!(f, "{:?}", self.traverse(SortOrder::Inorder))
     }
 }
