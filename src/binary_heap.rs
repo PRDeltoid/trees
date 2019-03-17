@@ -104,6 +104,10 @@ impl<T> BinaryHeap<T>
             self.percolate_down(smallest);
         }
     }
+
+    pub fn get_heap(&self) -> Vec<T> {
+        self.heap.clone()
+    }
 }
 
 impl<T> fmt::Display for BinaryHeap<T>
@@ -120,11 +124,45 @@ mod tests {
 
     #[test]
     fn test_insert() {
-        assert_eq!(0,0);
+        let mut bin: BinaryHeap<u32> = BinaryHeap::new();
+
+        bin.insert(1);
+        bin.insert(5);
+        bin.insert(10);
+        bin.insert(3);
+        bin.insert(2);
+        bin.insert(6);
+        bin.insert(7);
+        bin.insert(20);
+        assert_eq!(bin.heap,vec![1, 2, 6, 5, 3, 10, 7, 20]);
     }
 
     #[test]
     fn test_extract() {
-        assert_eq!(0,0);
+        //Build a heap
+        let mut bin: BinaryHeap<u32> = BinaryHeap::new();
+
+        bin.insert(1);
+        bin.insert(5);
+        bin.insert(10);
+        bin.insert(3);
+        bin.insert(2);
+        bin.insert(6);
+        bin.insert(7);
+        bin.insert(20);
+        assert_eq!(bin.get_heap(),vec![1, 2, 6, 5, 3, 10, 7, 20]);
+
+        //Extract
+        let val = bin.extract();
+        assert!(val.is_some());
+        assert_eq!(val.unwrap(), 1);
+        assert_eq!(bin.get_heap(),vec![2, 3, 6, 5, 20, 10, 7]);
+
+        //Extract again
+        let val = bin.extract();
+        assert!(val.is_some());
+        assert_eq!(val.unwrap(), 2);
+        assert_eq!(bin.get_heap(),vec![3, 5, 6, 7, 20, 10]);
+
     }
 }
