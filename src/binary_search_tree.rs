@@ -101,17 +101,15 @@ impl<T> BinarySearchTree<T>
         }
     }
 
-    pub fn print_tree(&self, sort: SortOrder) {
+    pub fn traverse(&self, sort: SortOrder) -> Vec<T> {
         let bst = BinaryTreeNode::get_node_tree(&self.root, sort);
-        println!{"{:?}", bst};
+        return bst;
     }
-
 }
 
 impl<T> fmt::Display for BinarySearchTree<T>
     where T: PartialOrd + Copy + fmt::Display + fmt::Debug {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", BinaryTreeNode::get_node_tree(&self.root, SortOrder::Inorder))
-
+        write!(f, "{:?}", self.traverse(SortOrder::Inorder)) //BinaryTreeNode::get_node_tree(&self.root, SortOrder::Inorder))
     }
 }
