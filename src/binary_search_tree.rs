@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[allow(dead_code)]
 #[derive(Copy, Clone)]
 pub enum SortOrder {
     Inorder,
@@ -14,6 +15,7 @@ struct BinaryTreeNode<T>
     val: T,
 }
 
+#[allow(dead_code)]
 impl<T> BinaryTreeNode<T>
     where T: PartialOrd + fmt::Display + fmt::Debug + Clone + Copy {
     pub fn new(value: T) -> BinaryTreeNode<T> {
@@ -74,6 +76,7 @@ pub struct BinarySearchTree<T>
     root: Option<Box<BinaryTreeNode<T>>>,
 }
 
+#[allow(dead_code)]
 impl<T> BinarySearchTree<T>
     where T: PartialOrd + Copy + fmt::Display + fmt::Debug {
     pub fn new(values: &Vec<T>) -> BinarySearchTree<T> {
@@ -111,5 +114,31 @@ impl<T> fmt::Display for BinarySearchTree<T>
     where T: PartialOrd + Copy + fmt::Display + fmt::Debug {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}", self.traverse(SortOrder::Inorder))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn traverse_inorder() {
+        let v = vec![3,2,5,1,4];
+        let tree = BinarySearchTree::new(&v);
+        assert_eq!(tree.traverse(SortOrder::Inorder), vec![1,2,3,4,5])
+    }
+
+    #[test]
+    fn traverse_preorder() {
+        let v = vec![3,2,5,1,4];
+        let tree = BinarySearchTree::new(&v);
+        assert_eq!(tree.traverse(SortOrder::Preorder), vec![3,2,1,5,4])
+    }
+
+    #[test]
+    fn traverse_postorder() {
+        let v = vec![3,2,5,1,4];
+        let tree = BinarySearchTree::new(&v);
+        assert_eq!(tree.traverse(SortOrder::Postorder), vec![1,2,4,5,3])
     }
 }

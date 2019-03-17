@@ -3,8 +3,4 @@ name = "trees"
 version = "0.1.0"
 authors = ["Taylor <tbrit10@gmail.com>"]
 
-[lib]
-name = "libtrees"
-path = "src/lib.rs"
-
 [dependencies]

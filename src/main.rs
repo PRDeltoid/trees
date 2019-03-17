@@ -3,7 +3,6 @@ mod binary_heap;
 
 use binary_heap::BinaryHeap;
 
-#[allow(dead_code)]
 fn main() {
 
     let mut bin: BinaryHeap<u32> = BinaryHeap::new();
