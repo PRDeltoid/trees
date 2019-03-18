@@ -1,7 +1,41 @@
 use std::fmt;
+use std::cmp::Ordering;
 
 pub struct BinaryHeap<T> {
     heap: Vec<T>,
+}
+
+#[derive(Clone, Copy, Default)]
+pub struct PriorityTuple<T> {
+    priority: u32,
+    pub value: T,
+}
+
+impl<T> PartialOrd for PriorityTuple<T> {
+    fn partial_cmp(&self, other: &PriorityTuple<T>) -> Option<Ordering> {
+        Some(self.priority.cmp(&other.priority))
+    }
+}
+
+impl<T> PartialEq for PriorityTuple<T> {
+    fn eq(&self, other: &PriorityTuple<T>) -> bool {
+        self.priority == other.priority
+    }
+}
+
+impl<T> fmt::Display for PriorityTuple<T>
+    where T: PartialOrd + Copy + fmt::Display + fmt::Debug {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Priority: {}, Value: {}", self.priority, self.value)
+    }
+}
+impl<T> PriorityTuple<T> {
+    pub fn new(priority: u32, value: T) -> PriorityTuple<T> {
+        PriorityTuple {
+            priority,
+            value,
+        }
+    }
 }
 
 #[allow(dead_code)]
@@ -107,6 +141,14 @@ impl<T> BinaryHeap<T>
 
     pub fn get_heap(&self) -> Vec<T> {
         self.heap.clone()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.heap.len() == 0
+    }
+
+    pub fn contains(&self, key: T) -> bool {
+        self.heap.contains(key)
     }
 }
 
